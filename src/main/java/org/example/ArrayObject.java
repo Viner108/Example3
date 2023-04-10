@@ -3,7 +3,9 @@ package org.example;
 public class ArrayObject {
     public static void main(String[] args) {
         testCreate();
-         testUpdate();
+        testUpdate();
+        testGetByIndex();
+        testDeleteObject();
     }
 
     private static void testCreate() {
@@ -37,6 +39,36 @@ public class ArrayObject {
             System.out.println("error testUpdate");
         }
     }
+
+    private static void testGetByIndex() {
+        int[] array = intit(5);//создает массив заполненный -1
+        int[] object = new int[2]; // первый объект для размещенние в массив с нулевыми значениями
+        objectCreate(array, object); // функция для размещение первого объкта в массиве
+        int indexofobject = 1; // индекс объекта в котором нужно заменить значение
+        int[] array2 = getByIndex(array, indexofobject);
+        printLines(array2);
+        if (!(array2[0] == 0 &&
+                array2[1] == 0)) {
+            System.out.println("error testGetByIndex");
+        }
+    }
+
+    private static void testDeleteObject() {
+        int[] array = intit(5);//создает массив заполненный -1
+        int[] object = new int[2]; // первый объект для размещенние в массив с нулевыми значениями
+        objectCreate(array, object); // функция для размещение первого объкта в массиве
+        int indexofobject = 1; // индекс объекта в котором нужно заменить значение
+        int[] array2 = deleteObject(array, indexofobject);
+        printLines(array2);
+        if (!(array2[0] == -1 &&
+                array2[1] == -1 &&
+        array2[2] == -1 &&
+        array2[3] == -1 &&
+        array2[4] == -1)){
+            System.out.println("error testDeleteObject");
+        }
+    }
+
 
     public static int[] intit(int size) { // функция для создания и заполнения исходного массива
         int[] array = new int[size];
@@ -124,6 +156,15 @@ public class ArrayObject {
             }
         }
         return array;
+    }
+    private static int[] deleteFromMiddle(int[] array, int indexofodject){
+        int[] array2=deleteObject(array,indexofodject);
+        for (int i = 0; i < array.length; i++) {
+            if(array2[i]!=-1){
+                array2[i-1]=array2[i];
+            }
+        }
+        return array2;
     }
 
 
