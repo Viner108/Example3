@@ -10,15 +10,17 @@ public class ArrayObject {
         int[] object = new int[6]; // первый объект для размещенние в массив с нулевыми значениями
         int[] object2 = new int[6];// второй объект для размещенние в массив с нулевыми значениями
         int[] object3 = new int[13];// третий объект для размещенние в массив с нулевыми значениями
-        int indexofobject = 3; // индекс объекта в котором нужно заменить значение
+        int indexofobject = 10; // индекс объекта в котором нужно заменить значение
         int value = 131;// значение для замены в объекте
-        int index = 9;// индекс значение в объкте который нужно заменить
+        int index = 0;// индекс значение в объкте который нужно заменить
         objectCreate(array, object); // функция для размещение первого объкта в массиве
         objectCreate(array, object2);// функция для размещение второго объкта в массиве
         objectCreate(array, object3);// функция для размещение третьего объкта в массиве
         update(array, index, indexofobject, value); //функция для замены значения в определенной объекте
         System.out.println(getCount(array));
-        System.out.println(getAdress(array,indexofobject));
+        System.out.println(getAdress(array, indexofobject));
+        printLines(getByIndex(array, indexofobject));
+        printLines(deleteObject(array, indexofobject));
     }
 
     public static int[] intit(int size) { // функция для создания и заполнения исходного массива
@@ -54,14 +56,11 @@ public class ArrayObject {
 
     public static boolean update(int[] array, int index, int indexofobject, int value) {//функиця для замены значения в
         //оперделенной объекте
-        int j = 0;
-        for (int i = 0; array[i] != -1; i = i + array[i] + 1) {
-            j++;
-            if (j == indexofobject &&index<array[i]) {
-                array[i + index + 1] = value;
-                printLines(array);
-                return true;
-            }
+        int start = getAdress(array, indexofobject);
+        if (start != -1 && index < array[start]) {
+            array[start + index + 1] = value;
+            printLines(array);
+            return true;
         }
         return false;
     }
@@ -76,14 +75,40 @@ public class ArrayObject {
         return j;
     }
 
-    public static int getAdress(int[] array, int indexofobject) {//функция пвзвращающая индекс начала определенного объекта
+    public static int getAdress(int[] array, int indexofobject) {//функция возвращающая индекс начала определенного объекта
         int j = 0;
+        int count = getCount(array);
         for (int i = 0; array[i] != -1; i = i + array[i] + 1) {
             j++;
-            if (j == indexofobject)
+            if (j == indexofobject && j <= count) {
                 return i;
+            }
         }
         return -1;
+    }
+
+    public static int[] getByIndex(int[] array, int indexofobject) {//функция выводит на консоль конкретный объект
+        int start = getAdress(array, indexofobject);
+        int[] error = new int[0];
+        if (start != -1) {
+            int[] array2 = new int[array[start]];
+            for (int i = start + 1; i < start + array[start]; i++) {
+                array2[i - start - 1] = array[i];
+                return array2;
+            }
+        }
+        return error;//если объекта под конкретным номером нет, то на консоль выводится пустой массив
+    }
+
+    public static int[] deleteObject(int[] array, int indexofobject) {//функция удаления конкретного объекта
+        int start = getAdress(array, indexofobject);
+        int[] array2 = getByIndex(array, indexofobject);
+        if (start != -1) {
+            for (int i = start; i < start + array2.length + 1; i++) {
+                array[i] = -1;
+            }
+        }
+        return array;
     }
 
     private static void printLines(int[] lines) {//функция для выведения массива на консоль
