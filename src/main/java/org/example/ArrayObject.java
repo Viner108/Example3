@@ -1,26 +1,41 @@
 package org.example;
 
-import java.util.Arrays;
-import java.util.Random;
-import java.util.stream.IntStream;
-
 public class ArrayObject {
     public static void main(String[] args) {
-        int[] array = intit(40);//создает массив заполненный -1
-        int[] object = new int[6]; // первый объект для размещенние в массив с нулевыми значениями
-        int[] object2 = new int[6];// второй объект для размещенние в массив с нулевыми значениями
-        int[] object3 = new int[13];// третий объект для размещенние в массив с нулевыми значениями
-        int indexofobject = 10; // индекс объекта в котором нужно заменить значение
-        int value = 131;// значение для замены в объекте
-        int index = 0;// индекс значение в объкте который нужно заменить
+        testCreate();
+         testUpdate();
+    }
+
+    private static void testCreate() {
+        int[] array = intit(5);//создает массив заполненный -1
+        int[] object = new int[2]; // первый объект для размещенние в массив с нулевыми значениями
         objectCreate(array, object); // функция для размещение первого объкта в массиве
-        objectCreate(array, object2);// функция для размещение второго объкта в массиве
-        objectCreate(array, object3);// функция для размещение третьего объкта в массиве
+        if (!(array[0] == 2 &&
+                array[1] == 0 &&
+                array[2] == 0 &&
+                array[3] == -1 &&
+                array[4] == -1
+        )) {
+            System.out.println("error testCreate");
+        }
+    }
+
+    private static void testUpdate() {
+        int[] array = intit(5);//создает массив заполненный -1
+        int[] object = new int[2]; // первый объект для размещенние в массив с нулевыми значениями
+        objectCreate(array, object); // функция для размещение первого объкта в массиве
+        int indexofobject = 1; // индекс объекта в котором нужно заменить значение
+        int value = 131;// значение для замены в объекте
+        int index = 1;// индекс значение в объкте который нужно заменить
         update(array, index, indexofobject, value); //функция для замены значения в определенной объекте
-        System.out.println(getCount(array));
-        System.out.println(getAdress(array, indexofobject));
-        printLines(getByIndex(array, indexofobject));
-        printLines(deleteObject(array, indexofobject));
+        if (!(array[0] == 2 &&
+                array[1] == 0 &&
+                array[2] == 131 &&
+                array[3] == -1 &&
+                array[4] == -1
+        )) {
+            System.out.println("error testUpdate");
+        }
     }
 
     public static int[] intit(int size) { // функция для создания и заполнения исходного массива
@@ -110,6 +125,7 @@ public class ArrayObject {
         }
         return array;
     }
+
 
     private static void printLines(int[] lines) {//функция для выведения массива на консоль
         System.out.print("[");
