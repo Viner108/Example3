@@ -6,9 +6,10 @@ public class ArrayObject {
         testUpdate();
         testGetByIndex();
         testDeleteObject();
+        testDeleteFromMiddle();
     }
 
-    private static void testCreate() {
+    private static void testCreate() {//тест функции objectCreate
         int[] array = intit(5);//создает массив заполненный -1
         int[] object = new int[2]; // первый объект для размещенние в массив с нулевыми значениями
         objectCreate(array, object); // функция для размещение первого объкта в массиве
@@ -22,13 +23,13 @@ public class ArrayObject {
         }
     }
 
-    private static void testUpdate() {
+    private static void testUpdate() {//тест функции testUpdate
         int[] array = intit(5);//создает массив заполненный -1
         int[] object = new int[2]; // первый объект для размещенние в массив с нулевыми значениями
         objectCreate(array, object); // функция для размещение первого объкта в массиве
-        int indexofobject = 1; // индекс объекта в котором нужно заменить значение
-        int value = 131;// значение для замены в объекте
-        int index = 1;// индекс значение в объкте который нужно заменить
+        int indexofobject = 1; // индекс объекта
+        int value = 131;// значение для внесения его в объект
+        int index = 1;// индекс значение в объкте
         update(array, index, indexofobject, value); //функция для замены значения в определенной объекте
         if (!(array[0] == 2 &&
                 array[1] == 0 &&
@@ -40,11 +41,11 @@ public class ArrayObject {
         }
     }
 
-    private static void testGetByIndex() {
+    private static void testGetByIndex() {//тест функции testGetByIndex
         int[] array = intit(5);//создает массив заполненный -1
         int[] object = new int[2]; // первый объект для размещенние в массив с нулевыми значениями
         objectCreate(array, object); // функция для размещение первого объкта в массиве
-        int indexofobject = 1; // индекс объекта в котором нужно заменить значение
+        int indexofobject = 1; // индекс
         int[] array2 = getByIndex(array, indexofobject);
         printLines(array2);
         if (!(array2[0] == 0 &&
@@ -53,19 +54,43 @@ public class ArrayObject {
         }
     }
 
-    private static void testDeleteObject() {
+    private static void testDeleteObject() {//тест функции testDeleteObject
         int[] array = intit(5);//создает массив заполненный -1
         int[] object = new int[2]; // первый объект для размещенние в массив с нулевыми значениями
         objectCreate(array, object); // функция для размещение первого объкта в массиве
-        int indexofobject = 1; // индекс объекта в котором нужно заменить значение
+        int indexofobject = 1; // индекс объекта
         int[] array2 = deleteObject(array, indexofobject);
         printLines(array2);
         if (!(array2[0] == -1 &&
                 array2[1] == -1 &&
-        array2[2] == -1 &&
-        array2[3] == -1 &&
-        array2[4] == -1)){
+                array2[2] == -1 &&
+                array2[3] == -1 &&
+                array2[4] == -1)) {
             System.out.println("error testDeleteObject");
+        }
+    }
+
+    private static void testDeleteFromMiddle() {//тест функции testDeleteFromMiddle
+        int[] array = intit(9);//создает массив заполненный -1
+        int[] object = new int[2]; // первый объект для размещенние в массив с нулевыми значениями
+        int[] object2 = new int[2];// второй объект для размещенние в массив с нулевыми значениями
+        int[] object3 = new int[2];// третий объект для размещенние в массив с нулевыми значениями
+        objectCreate(array, object); // функция для размещение первого объкта в массиве
+        objectCreate(array, object2);// функция для размещение второго объкта в массиве
+        objectCreate(array, object3);// функция для размещение третьего объкта в массиве
+        int indexofobject = 2; // индекс объекта
+        int[] array2 = deleteFromMiddle(array, indexofobject);
+        printLines(array2);
+        if (!(array2[0] == 2 &&
+                array2[1] == 0 &&
+                array2[2] == 0 &&
+                array2[3] == 2 &&
+                array2[4] == 0 &&
+                array2[5] == 0 &&
+                array2[6] == -1 &&
+                array2[7] == -1 &&
+                array2[8] == -1)) {
+            System.out.println("error testDeleteFromMiddle");
         }
     }
 
@@ -81,7 +106,7 @@ public class ArrayObject {
 
     private static boolean objectCreate(int[] array, int[] object) { // функция для размещения объекта в массиве
         int star = finStart(array);
-        if (array.length - star < object.length) {
+        if (array.length - star < object.length + 1) {
             return false;
         }
         array[star] = object.length;
@@ -115,7 +140,7 @@ public class ArrayObject {
     public static int getCount(int[] array) {//функция считает количество объектов в массиве
         int j = 0;
         int i = 0;
-        while (array[i] != -1) {
+        while (i < array.length && array[i] != -1) {
             i = i + array[i] + 1;
             j++;
         }
@@ -157,13 +182,23 @@ public class ArrayObject {
         }
         return array;
     }
-    private static int[] deleteFromMiddle(int[] array, int indexofodject){
-        int[] array2=deleteObject(array,indexofodject);
-        for (int i = 0; i < array.length; i++) {
-            if(array2[i]!=-1){
-                array2[i-1]=array2[i];
+
+    private static int[] deleteFromMiddle(int[] array, int indexofodject) {//функция удаляет определенный объект
+        // и сдвигает оставщиеся в левую сторону
+        int start = getAdress(array, indexofodject);
+        int count = getCount(array);
+        int[] array2 = deleteObject(array, indexofodject);
+        printLines(array2);
+        while (array2[start] == -1 && count != indexofodject) {
+            for (int i = 1; i < array2.length; i++) {
+                if (i < array2.length && array2[i] != -1) {
+                    int temp = array2[i - 1];
+                    array2[i - 1] = array2[i];
+                    array2[i] = temp;
+                }
             }
         }
+        printLines(array2);
         return array2;
     }
 
