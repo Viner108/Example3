@@ -2,11 +2,12 @@ package org.example;
 
 public class ArrayObject {
     public static void main(String[] args) {
-        testCreate();
-        testUpdate();
-        testGetByIndex();
-        testDeleteObject();
-        testDeleteFromMiddle();
+//        testCreate();
+//        testUpdate();
+//        testGetByIndex();
+//        testDeleteObject();
+//        testDeleteFromMiddle();
+        testInsertObject();
     }
 
     private static void testCreate() {//тест функции objectCreate
@@ -94,6 +95,30 @@ public class ArrayObject {
         }
     }
 
+    private static void testInsertObject() {//тест функции testInsertObject
+        int[] array = intit(9);//создает массив заполненный -1
+        int[] object = new int[1]; // первый объект для размещенние в массив с нулевыми значениями
+        int[] object2 = new int[1];// второй объект для размещенние в массив с нулевыми значениями
+        int[] object3 = new int[1];// третий объект для размещенние в массив с нулевыми значениями
+        int[] object4 = new int[2];// третий объект для размещенние в массив с нулевыми значениями
+        objectCreate(array, object); // функция для размещение первого объкта в массиве
+        objectCreate(array, object2);// функция для размещение второго объкта в массиве
+        objectCreate(array, object3);// функция для размещение третьего объкта в массиве
+        int indexofobject = 2; // индекс объекта
+        int[] array2 = insertObject(array, indexofobject, object4);
+        printLines(array2);
+        if (!(array2[0] == 1 &&
+                array2[1] == 0 &&
+                array2[2] == 1 &&
+                array2[3] == 0 &&
+                array2[4] == 2 &&
+                array2[5] == 0 &&
+                array2[6] == 0 &&
+                array2[7] == 1 &&
+                array2[8] == 0 )) {
+            System.out.println("error testInsertObject");
+        }
+    }
 
     public static int[] intit(int size) { // функция для создания и заполнения исходного массива
         int[] array = new int[size];
@@ -105,13 +130,13 @@ public class ArrayObject {
     }
 
     private static boolean objectCreate(int[] array, int[] object) { // функция для размещения объекта в массиве
-        int star = finStart(array);
-        if (array.length - star < object.length + 1) {
+        int start = finStart(array);
+        if (array.length - start < object.length + 1) {
             return false;
         }
-        array[star] = object.length;
+        array[start] = object.length;
         for (int i = 0; i < object.length; i++) {
-            array[star + i + 1] = object[i];
+            array[start + i + 1] = object[i];
         }
         printLines(array);
         return true;
@@ -148,7 +173,7 @@ public class ArrayObject {
     }
 
     public static int getAdress(int[] array, int indexofobject) {//функция возвращающая индекс начала определенного объекта
-        int j = 0;
+        int j = -1;
         int count = getCount(array);
         for (int i = 0; array[i] != -1; i = i + array[i] + 1) {
             j++;
@@ -183,13 +208,12 @@ public class ArrayObject {
         return array;
     }
 
-    private static int[] deleteFromMiddle(int[] array, int indexofodject) {//функция удаляет определенный объект
+    private static int[] deleteFromMiddle(int[] array, int indexofobject) {//функция удаляет определенный объект
         // и сдвигает оставщиеся в левую сторону
-        int start = getAdress(array, indexofodject);
+        int start = getAdress(array, indexofobject);
         int count = getCount(array);
-        int[] array2 = deleteObject(array, indexofodject);
-        printLines(array2);
-        while (array2[start] == -1 && count != indexofodject) {
+        int[] array2 = deleteObject(array, indexofobject);
+        while (array2[start] == -1 && count != indexofobject) {
             for (int i = 1; i < array2.length; i++) {
                 if (i < array2.length && array2[i] != -1) {
                     int temp = array2[i - 1];
@@ -202,6 +226,30 @@ public class ArrayObject {
         return array2;
     }
 
+    private static int[] insertObject(int[] array, int indexofobject, int[] object) {//функиция для вставки определенного объекта
+        //на конкретный индекс объекта со сдгивом остальных вправо
+        int start = getAdress(array, indexofobject);
+        int elements =finStart(array);
+        int j=0;
+        if (object.length<=array.length-elements-1) {//условие для просмотра количества оставщейся памяти в массиве
+            while (array[start] != -1 || j != object.length + 1) {
+                for (int i = array.length - 1; i > start; i--) {
+                    int temp = array[i - 1];
+                    array[i - 1] = array[i];
+                    array[i] = temp;
+                }
+                j++;
+                printLines(array);
+            }
+            array[start] = object.length;
+            for (int i = 0; i < object.length; i++) {
+                array[start + i + 1] = object[i];
+
+            }
+        }
+        printLines(array);
+        return array;
+    }
 
     private static void printLines(int[] lines) {//функция для выведения массива на консоль
         System.out.print("[");
