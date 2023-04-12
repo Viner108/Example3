@@ -2,12 +2,12 @@ package org.example;
 
 public class ArrayObject {
     public static void main(String[] args) {
-//        testCreate();
-//        testUpdate();
-//        testGetByIndex();
-//        testDeleteObject();
-//        testDeleteFromMiddle();
-//        testInsertObject();
+        testCreate();
+        testUpdate();
+        testGetByIndex();
+        testDeleteObject();
+        testDeleteFromMiddle();
+        testInsertObject();
         testSwap();
     }
 
@@ -22,6 +22,8 @@ public class ArrayObject {
                 array[4] == -1
         )) {
             System.out.println("error testCreate");
+        }else {
+            System.out.println("correct testCreate");
         }
     }
 
@@ -29,10 +31,11 @@ public class ArrayObject {
         int[] array = intit(5);//создает массив заполненный -1
         int[] object = new int[2]; // первый объект для размещенние в массив с нулевыми значениями
         objectCreate(array, object); // функция для размещение первого объкта в массиве
-        int indexofobject = 1; // индекс объекта
+        int indexofobject = 0; // индекс объекта
         int value = 131;// значение для внесения его в объект
         int index = 1;// индекс значение в объкте
         update(array, index, indexofobject, value); //функция для замены значения в определенной объекте
+        printLines(array);
         if (!(array[0] == 2 &&
                 array[1] == 0 &&
                 array[2] == 131 &&
@@ -40,6 +43,8 @@ public class ArrayObject {
                 array[4] == -1
         )) {
             System.out.println("error testUpdate");
+        }else {
+            System.out.println("correct testUpdate");
         }
     }
 
@@ -47,12 +52,14 @@ public class ArrayObject {
         int[] array = intit(5);//создает массив заполненный -1
         int[] object = new int[2]; // первый объект для размещенние в массив с нулевыми значениями
         objectCreate(array, object); // функция для размещение первого объкта в массиве
-        int indexofobject = 1; // индекс
+        int indexofobject = 0; // индекс
         int[] array2 = getByIndex(array, indexofobject);
         printLines(array2);
         if (!(array2[0] == 0 &&
                 array2[1] == 0)) {
             System.out.println("error testGetByIndex");
+        }else {
+            System.out.println("correct testGetByIndex");
         }
     }
 
@@ -60,7 +67,7 @@ public class ArrayObject {
         int[] array = intit(5);//создает массив заполненный -1
         int[] object = new int[2]; // первый объект для размещенние в массив с нулевыми значениями
         objectCreate(array, object); // функция для размещение первого объкта в массиве
-        int indexofobject = 1; // индекс объекта
+        int indexofobject = 0; // индекс объекта
         int[] array2 = deleteObject(array, indexofobject);
         printLines(array2);
         if (!(array2[0] == -1 &&
@@ -69,6 +76,8 @@ public class ArrayObject {
                 array2[3] == -1 &&
                 array2[4] == -1)) {
             System.out.println("error testDeleteObject");
+        }else {
+            System.out.println("correct testDeleteObject");
         }
     }
 
@@ -96,6 +105,8 @@ public class ArrayObject {
                 array2[7] == -1 &&
                 array2[8] == -1)) {
             System.out.println("error testDeleteFromMiddle");
+        }else {
+            System.out.println("correct testDeleteFromMiddle");
         }
     }
 
@@ -119,15 +130,18 @@ public class ArrayObject {
                 array2[5] == 0 &&
                 array2[6] == 0 &&
                 array2[7] == 1 &&
-                array2[8] == 0 )) {
+                array2[8] == 0)) {
             System.out.println("error testInsertObject");
+        }else {
+            System.out.println("correct testInsertObject");
         }
     }
+
     private static void testSwap() {//тест функции swap
-        int[] array = intit(9);//создает массив заполненный -1
-        int[] object = new int[1]; // первый объект для размещенние в массив с нулевыми значениями
+        int[] array = intit(11);//создает массив заполненный -1
+        int[] object = new int[2]; // первый объект для размещенние в массив с нулевыми значениями
         int[] object2 = new int[1];// второй объект для размещенние в массив с нулевыми значениями
-        int[] object3 = new int[1];// третий объект для размещенние в массив с нулевыми значениями
+        int[] object3 = new int[4];// третий объект для размещенние в массив с нулевыми значениями
         objectCreate(array, object); // функция для размещение первого объкта в массиве
         objectCreate(array, object2);// функция для размещение второго объкта в массиве
         objectCreate(array, object3);// функция для размещение третьего объкта в массиве
@@ -136,19 +150,25 @@ public class ArrayObject {
         int value = 131;// значение для внесения его в объект
         int index = 0;// индекс значение в объкте
         update(array, index, indexofobject1, value); //функция для замены значения в определенной объекте
-        update(array,index,indexofobject2,12);
-        int[] array2=swap(array,indexofobject1,indexofobject2);
+        update(array, 1, indexofobject1, 10); //функция для замены значения в определенной объекте
+        update(array, index, indexofobject2, 12);//функция для замены значения в определенной объекте
+        update(array, 2, indexofobject2, 20);//функция для замены значения в определенной объекте
+        int[] array2 = swap(array, indexofobject1, indexofobject2);
         printLines(array2);
-        if (!(array2[0] == 1 &&
+        if (!(array2[0] == 4 &&
                 array2[1] == 12 &&
-                array2[2] == 1 &&
-                array2[3] == 0 &&
-                array2[4] == 1 &&
-                array2[5] == 131 &&
-                array2[6] == -1 &&
-                array2[7] == -1 &&
-                array2[8] == -1 )) {
+                array2[2] == 0 &&
+                array2[3] == 20 &&
+                array2[4] == 0 &&
+                array2[5] == 1 &&
+                array2[6] == 0 &&
+                array2[7] == 2 &&
+                array2[8] == 131 &&
+                array2[9] == 10 &&
+                array2[10] == -1)) {
             System.out.println("error testSwap");
+        }else {
+            System.out.println("correct testSwap");
         }
     }
 
@@ -245,16 +265,16 @@ public class ArrayObject {
         int start = getAdress(array, indexofobject);
         int count = getCount(array);
         int[] array2 = deleteObject(array, indexofobject);
-            while (array2[start] == -1 && count != indexofobject) {
-                for (int i = 1; i < array2.length; i++) {
-                    if (i < array2.length && array2[i] != -1) {
-                        int temp = array2[i - 1];
-                        array2[i - 1] = array2[i];
-                        array2[i] = temp;
-                        printLines(array2);
-                    }
+        while (array2[start] == -1 && count != indexofobject) {
+            for (int i = 1; i < array2.length; i++) {
+                if (i < array2.length && array2[i] != -1) {
+                    int temp = array2[i - 1];
+                    array2[i - 1] = array2[i];
+                    array2[i] = temp;
+                    printLines(array2);
                 }
             }
+        }
         printLines(array2);
         return array2;
     }
@@ -262,9 +282,9 @@ public class ArrayObject {
     private static int[] insertObject(int[] array, int indexofobject, int[] object) {//функиция для вставки определенного объекта
         //на конкретный индекс объекта со сдгивом остальных вправо
         int start = getAdress(array, indexofobject);
-        int elements =finStart(array);
-        int j=0;
-        if (object.length<=array.length-elements-1) {//условие для просмотра количества оставщейся памяти в массиве
+        int elements = finStart(array);
+        int j = 0;
+        if (object.length <= array.length - elements - 1) {//условие для просмотра количества оставщейся памяти в массиве
             while (array[start] != -1 || j != object.length + 1) {
                 for (int i = array.length - 1; i > start; i--) {
                     int temp = array[i - 1];
@@ -283,19 +303,64 @@ public class ArrayObject {
         printLines(array);
         return array;
     }
-     public static int[] swap(int [] array, int indexofobject1, int indexofobject2){//только для объектов одинакового размера
-        int start1 = getAdress(array,indexofobject1);
-        int start2 = getAdress(array,indexofobject2);
-         for (int i = 0; i < array[start1]; i++) {
-             int temp=array[start1];
-             array[start1]=array[start2];
-             array[start2]=temp;
-             start1++;
-             start2++;
-         }
-         printLines(array);
+
+    public static int[] swap(int[] array, int indexofobject1, int indexofobject2) {//функция что меняет местами два объекта
+        //в массиве с сохранением их значений
+        int start1 = getAdress(array, indexofobject1);
+        int start2 = getAdress(array, indexofobject2);
+        int difference = array[start1] - array[start2];
+        int difference2 = array[start2] - array[start1];
+        int common = Math.min(array[start1],array[start2]);
+        int j = 1;
+        if (array[start1] == array[start2]) {
+            for (int i = 0; i < array[start1]; i++) {
+                int temp = array[start1];
+                array[start1] = array[start2];
+                array[start2] = temp;
+                start1++;
+                start2++;
+            }
+        } else if (array[start1] > array[start2]) {
+            for (int i = 0; i < common+1; i++) {
+                int temp = array[start2];
+                array[start2] = array[start1];
+                array[start1] = temp;
+                    start1++;
+                    start2++;
+                printLines(array);
+            }
+            while (difference >= j) {
+                for (int i = start1 + 1; i < start2 ; i++) {
+                    int temp = array[i];
+                    array[i] = array[i - 1];
+                    array[i - 1] = temp;
+                    printLines(array);
+                }
+                j++;
+            }
+        }
+        else if (array[start1] < array[start2]) {
+            for (int i = 0; i < common+1; i++) {
+                int temp = array[start1];
+                array[start1] = array[start2];
+                array[start2] = temp;
+                start1++;
+                start2++;
+                printLines(array);
+            }
+            while (difference2 >= j) {
+                for (int i = start2 + difference2-1; i > start1 ; i--) {
+                    int temp = array[i-1];
+                    array[i-1] = array[i];
+                    array[i] = temp;
+                    printLines(array);
+                }
+                j++;
+            }
+        }
+        printLines(array);
         return array;
-     }
+    }
 
     private static void printLines(int[] lines) {//функция для выведения массива на консоль
         System.out.print("[");
@@ -303,7 +368,7 @@ public class ArrayObject {
             if (i > 0) {
                 System.out.print(", ");
             }
-            System.out.print(String.format(" %2d" ,lines[i]));
+            System.out.print(String.format(" %2d", lines[i]));
         }
         System.out.println("]");
     }
