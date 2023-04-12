@@ -6,8 +6,8 @@ public class ArrayObject {
 //        testUpdate();
 //        testGetByIndex();
 //        testDeleteObject();
-//        testDeleteFromMiddle();
-        testInsertObject();
+        testDeleteFromMiddle();
+//        testInsertObject();
     }
 
     private static void testCreate() {//тест функции objectCreate
@@ -80,6 +80,9 @@ public class ArrayObject {
         objectCreate(array, object2);// функция для размещение второго объкта в массиве
         objectCreate(array, object3);// функция для размещение третьего объкта в массиве
         int indexofobject = 2; // индекс объекта
+        int value = 131;// значение для внесения его в объект
+        int index = 1;// индекс значение в объкте
+        update(array, index, indexofobject, value); //функция для замены значения в определенной объекте
         int[] array2 = deleteFromMiddle(array, indexofobject);
         printLines(array2);
         if (!(array2[0] == 2 &&
@@ -163,7 +166,7 @@ public class ArrayObject {
     }
 
     public static int getCount(int[] array) {//функция считает количество объектов в массиве
-        int j = 0;
+        int j = -1;
         int i = 0;
         while (i < array.length && array[i] != -1) {
             i = i + array[i] + 1;
@@ -213,15 +216,16 @@ public class ArrayObject {
         int start = getAdress(array, indexofobject);
         int count = getCount(array);
         int[] array2 = deleteObject(array, indexofobject);
-        while (array2[start] == -1 && count != indexofobject) {
-            for (int i = 1; i < array2.length; i++) {
-                if (i < array2.length && array2[i] != -1) {
-                    int temp = array2[i - 1];
-                    array2[i - 1] = array2[i];
-                    array2[i] = temp;
+            while (array2[start] == -1 && count != indexofobject) {
+                for (int i = 1; i < array2.length; i++) {
+                    if (i < array2.length && array2[i] != -1) {
+                        int temp = array2[i - 1];
+                        array2[i - 1] = array2[i];
+                        array2[i] = temp;
+                        printLines(array2);
+                    }
                 }
             }
-        }
         printLines(array2);
         return array2;
     }
@@ -257,7 +261,7 @@ public class ArrayObject {
             if (i > 0) {
                 System.out.print(", ");
             }
-            System.out.print(lines[i]);
+            System.out.print(String.format(" %2d" ,lines[i]));
         }
         System.out.println("]");
     }
