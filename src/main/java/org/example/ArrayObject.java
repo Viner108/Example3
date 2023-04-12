@@ -6,8 +6,9 @@ public class ArrayObject {
 //        testUpdate();
 //        testGetByIndex();
 //        testDeleteObject();
-        testDeleteFromMiddle();
+//        testDeleteFromMiddle();
 //        testInsertObject();
+        testSwap();
     }
 
     private static void testCreate() {//тест функции objectCreate
@@ -24,7 +25,7 @@ public class ArrayObject {
         }
     }
 
-    private static void testUpdate() {//тест функции testUpdate
+    private static void testUpdate() {//тест функции update
         int[] array = intit(5);//создает массив заполненный -1
         int[] object = new int[2]; // первый объект для размещенние в массив с нулевыми значениями
         objectCreate(array, object); // функция для размещение первого объкта в массиве
@@ -42,7 +43,7 @@ public class ArrayObject {
         }
     }
 
-    private static void testGetByIndex() {//тест функции testGetByIndex
+    private static void testGetByIndex() {//тест функции getByIndex
         int[] array = intit(5);//создает массив заполненный -1
         int[] object = new int[2]; // первый объект для размещенние в массив с нулевыми значениями
         objectCreate(array, object); // функция для размещение первого объкта в массиве
@@ -55,7 +56,7 @@ public class ArrayObject {
         }
     }
 
-    private static void testDeleteObject() {//тест функции testDeleteObject
+    private static void testDeleteObject() {//тест функции deleteObject
         int[] array = intit(5);//создает массив заполненный -1
         int[] object = new int[2]; // первый объект для размещенние в массив с нулевыми значениями
         objectCreate(array, object); // функция для размещение первого объкта в массиве
@@ -71,7 +72,7 @@ public class ArrayObject {
         }
     }
 
-    private static void testDeleteFromMiddle() {//тест функции testDeleteFromMiddle
+    private static void testDeleteFromMiddle() {//тест функции deleteFromMiddle
         int[] array = intit(9);//создает массив заполненный -1
         int[] object = new int[2]; // первый объект для размещенние в массив с нулевыми значениями
         int[] object2 = new int[2];// второй объект для размещенние в массив с нулевыми значениями
@@ -98,7 +99,7 @@ public class ArrayObject {
         }
     }
 
-    private static void testInsertObject() {//тест функции testInsertObject
+    private static void testInsertObject() {//тест функции insertObject
         int[] array = intit(9);//создает массив заполненный -1
         int[] object = new int[1]; // первый объект для размещенние в массив с нулевыми значениями
         int[] object2 = new int[1];// второй объект для размещенние в массив с нулевыми значениями
@@ -120,6 +121,34 @@ public class ArrayObject {
                 array2[7] == 1 &&
                 array2[8] == 0 )) {
             System.out.println("error testInsertObject");
+        }
+    }
+    private static void testSwap() {//тест функции swap
+        int[] array = intit(9);//создает массив заполненный -1
+        int[] object = new int[1]; // первый объект для размещенние в массив с нулевыми значениями
+        int[] object2 = new int[1];// второй объект для размещенние в массив с нулевыми значениями
+        int[] object3 = new int[1];// третий объект для размещенние в массив с нулевыми значениями
+        objectCreate(array, object); // функция для размещение первого объкта в массиве
+        objectCreate(array, object2);// функция для размещение второго объкта в массиве
+        objectCreate(array, object3);// функция для размещение третьего объкта в массиве
+        int indexofobject1 = 0;
+        int indexofobject2 = 2;
+        int value = 131;// значение для внесения его в объект
+        int index = 0;// индекс значение в объкте
+        update(array, index, indexofobject1, value); //функция для замены значения в определенной объекте
+        update(array,index,indexofobject2,12);
+        int[] array2=swap(array,indexofobject1,indexofobject2);
+        printLines(array2);
+        if (!(array2[0] == 1 &&
+                array2[1] == 12 &&
+                array2[2] == 1 &&
+                array2[3] == 0 &&
+                array2[4] == 1 &&
+                array2[5] == 131 &&
+                array2[6] == -1 &&
+                array2[7] == -1 &&
+                array2[8] == -1 )) {
+            System.out.println("error testSwap");
         }
     }
 
@@ -254,6 +283,19 @@ public class ArrayObject {
         printLines(array);
         return array;
     }
+     public static int[] swap(int [] array, int indexofobject1, int indexofobject2){//только для объектов одинакового размера
+        int start1 = getAdress(array,indexofobject1);
+        int start2 = getAdress(array,indexofobject2);
+         for (int i = 0; i < array[start1]; i++) {
+             int temp=array[start1];
+             array[start1]=array[start2];
+             array[start2]=temp;
+             start1++;
+             start2++;
+         }
+         printLines(array);
+        return array;
+     }
 
     private static void printLines(int[] lines) {//функция для выведения массива на консоль
         System.out.print("[");
