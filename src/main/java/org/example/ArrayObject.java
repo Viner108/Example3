@@ -175,9 +175,9 @@ public class ArrayObject {
 
     private static void testShift() {//тест функции swap
         int[] array = intit(11);//создает массив заполненный -1
-        int[] object = new int[2]; // первый объект для размещенние в массив с нулевыми значениями
+        int[] object = new int[4]; // первый объект для размещенние в массив с нулевыми значениями
         int[] object2 = new int[1];// второй объект для размещенние в массив с нулевыми значениями
-        int[] object3 = new int[4];// третий объект для размещенние в массив с нулевыми значениями
+        int[] object3 = new int[3];// третий объект для размещенние в массив с нулевыми значениями
         objectCreate(array, object); // функция для размещение первого объкта в массиве
         objectCreate(array, object2);// функция для размещение второго объкта в массиве
         objectCreate(array, object3);// функция для размещение третьего объкта в массиве
@@ -186,19 +186,19 @@ public class ArrayObject {
         int[] array2 = shift(array, indexofobject1, indexofobject2);
         printLines(array2);
         if (!(array2[0] == 4 &&
-                array2[1] == 12 &&
+                array2[1] == 0 &&
                 array2[2] == 0 &&
-                array2[3] == 20 &&
-                array2[4] == 0 &&
-                array2[5] == 1 &&
+                array2[3] == 0 &&
+                array2[4] == 1 &&
+                array2[5] == 0 &&
                 array2[6] == 0 &&
-                array2[7] == 2 &&
-                array2[8] == 131 &&
-                array2[9] == 10 &&
-                array2[10] == -1)) {
-            System.out.println("error testSwap");
+                array2[7] == 3 &&
+                array2[8] == 0 &&
+                array2[9] == 0 &&
+                array2[10] == 0)) {
+            System.out.println("error testShift");
         } else {
-            System.out.println("correct testSwap");
+            System.out.println("correct testShift");
         }
     }
 
@@ -396,12 +396,17 @@ public class ArrayObject {
     public static int[] shift(int[] array, int indexofobject1, int indexofobject2) {
         int start1 = getAdress(array, indexofobject1);
         int start2 = getAdress(array, indexofobject2);
-        int common = Math.min(array[start1], array[start2]);
-        if (start1>start2){
+        if (array[start1]>array[start2]&&indexofobject1-indexofobject2!=1){
             int difference = array[start1] - array[start2];
+            for (int i = start1+array[start1]+1; i <start2 ; i++) {
+                array[i-difference]=array[i];
+            }
 
-        }else {
+        }else if(array[start1]<array[start2]&&indexofobject1-indexofobject2!=1) {
             int difference = array[start2] - array[start1];
+            for (int i =start2-1; i >start1+array[start1]; i--) {
+               array[i+difference]= array[i];
+            }
         }
             return array;
     }
