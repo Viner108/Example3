@@ -209,8 +209,13 @@ public class ArrayObject {
     private static void testSwap2() {//тест функции swap
         int[] array = intit(12);//создает массив заполненный -1
         int[] object = new int[2]; // первый объект для размещенние в массив с нулевыми значениями
+        object[0]=12;
+        object[1]=22;
         int[] object2 = new int[1];// второй объект для размещенние в массив с нулевыми значениями
+        object2[0]=8;
         int[] object3 = new int[6];// третий объект для размещенние в массив с нулевыми значениями
+        object3[0]=302;
+        object3[2]=27;
         objectCreate(array, object); // функция для размещение первого объкта в массиве
         objectCreate(array, object2);// функция для размещение второго объкта в массиве
         objectCreate(array, object3);// функция для размещение третьего объкта в массиве
@@ -415,8 +420,8 @@ public class ArrayObject {
             int[] array2 = new int[array[start]];
             for (int i = start + 1; i < start + array[start] + 1; i++) {
                 array2[i - start - 1] = array[i];
-                return array2;
             }
+            return array2;
         }
         return error;//если объекта под конкретным номером нет, то на консоль выводится пустой массив
     }
@@ -560,6 +565,7 @@ public class ArrayObject {
             array[i + 1] = object[i - start];
             printLines(array);
         }
+        printLines(array);
         return array;
     }
 
@@ -575,28 +581,19 @@ public class ArrayObject {
 
     public static int[] swap2(int[] array, int indexofobject1, int indexofobject2) {//функция что меняет местами два объекта
         //в массиве с сохранением их значений
-        if (indexofobject1 < indexofobject2) {
-            int[] object1 = getByIndex(array, indexofobject1);
-            int[] object2 = getByIndex(array, indexofobject2);
-            int[] array2 = shift(array, indexofobject1, indexofobject2);
-            printLines(array2);
-            int[] array3 = copy(array2, indexofobject1,  object2);
-            printLines(array3);
-            int[] array4 = copy(array2, indexofobject2,  object1);
-            printLines(array4);
-        } else {
+        if (indexofobject1 >= indexofobject2) {
             int temp = indexofobject1;
             indexofobject1 = indexofobject2;
             indexofobject2 = temp;
-            int[] object1 = getByIndex(array, indexofobject1);
-            int[] object2 = getByIndex(array, indexofobject2);
-            int[] array2 = shift(array, indexofobject1, indexofobject2);
-            printLines(array2);
-            int[] array3 = copy(array2, indexofobject1, object2);
-            printLines(array3);
-            int[] array4 = copy(array2, indexofobject2, object1);
-            printLines(array4);
         }
+        int[] object1 = getByIndex(array, indexofobject1);
+        printLines(object1);
+        int[] object2 = getByIndex(array, indexofobject2);
+        printLines(object2);
+        int[] array2 = shift(array, indexofobject1, indexofobject2);
+        int[] array3 = copy(array2, indexofobject1, object2);
+        int[] array4 = copy(array3, indexofobject2, object1);
+        printLines(array4);
         return array;
     }
 
@@ -607,7 +604,6 @@ public class ArrayObject {
         for (int i = 0; i < array.length&&array[i]!=-1; i = i + array[i] + 1) {
             adress[j] = array[i];
             j++;
-            printLines(adress);
         }
         printLines(adress);
         return adress;
@@ -620,7 +616,7 @@ public class ArrayObject {
             isSorted = true;
             for (int i = 1; i < adress.length; i++) {
                 if (adress[i] < adress[i - 1]) {
-                    array = swap(array, i-1, i);
+                    array = swap2(array, i-1, i);
                     int temp = adress[i];
                     adress[i] = adress[i - 1];
                     adress[i - 1] = temp;
