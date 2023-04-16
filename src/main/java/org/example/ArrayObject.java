@@ -2,17 +2,18 @@ package org.example;
 
 public class ArrayObject {
     public static void main(String[] args) {
-        testCreate();
-        testUpdate();
-        testGetByIndex();
-        testDeleteObject();
-        testDeleteFromMiddle();
-        testInsertObject();
-        testSwap();
-        testShift();
-        testSwap2();
-        testArrayAdress();
-        testSorting();
+//        testCreate();
+//        testUpdate();
+//        testGetByIndex();
+//        testDeleteObject();
+//        testDeleteFromMiddle();
+//        testInsertObject();
+//        testSwap();
+//        testShift();
+//        testSwap2();
+//        testArrayAdress();
+//        testSorting();
+        testSorting2();
     }
 
     private static void testCreate() {//тест функции objectCreate
@@ -273,6 +274,69 @@ public class ArrayObject {
                 array2[9] == -1 &&
                 array2[10] == -1 &&
                 array2[11] == -1)) {
+            System.out.println("error testSorting");
+        } else {
+            System.out.println("correct testSorting");
+        }
+    }
+    private static void testSorting2() {//тест функции swap
+        int[] array = intit(35);//создает массив заполненный -1
+        int[] object1 = new int[3]; // первый объект для размещенние в массив с нулевыми значениями
+        object1[1] = 1;
+        object1[2] = 2;
+        int[] object2 = new int[8];// второй объект для размещенние в массив с нулевыми значениями
+        object2[1] = 11;
+        object2[4] = 11;
+        int[] object3 = new int[5];// второй объект для размещенние в массив с нулевыми значениями
+        object3[1] = 33;
+        object3[2] = 33;
+        int[] object4 = new int[7];// второй объект для размещенние в массив с нулевыми значениями
+        object4[1] = 77;
+        object4[5] = 77;
+        int[] object5 = new int[2];// второй объект для размещенние в массив с нулевыми значениями
+        int[] object6 = new int[4];// третий объект для размещенние в массив с нулевыми значениями
+        objectCreate(array, object1); // функция для размещение первого объкта в массиве
+        objectCreate(array, object2);// функция для размещение второго объкта в массиве
+        objectCreate(array, object3);// функция для размещение второго объкта в массиве
+        objectCreate(array, object4);// функция для размещение третьего объкта в массиве
+        objectCreate(array, object5);// функция для размещение третьего объкта в массиве
+        objectCreate(array, object6);// функция для размещение третьего объкта в массиве
+        int[] array2 = sorting(array);
+        if (!(array2[0] == 2 &&
+                array2[1] == 0 &&
+                array2[2] == 0 &&
+                array2[3] == 3 &&
+                array2[4] == 0 &&
+                array2[5] == 1 &&
+                array2[6] == 2 &&
+                array2[7] == 4&&
+                array2[8] == 0 &&
+                array2[9] == 0 &&
+                array2[10] == 0 &&
+                array2[11] == 0 &&
+                array2[12] == 5 &&
+                array2[13] == 0 &&
+                array2[14] == 33 &&
+                array2[15] == 33 &&
+                array2[16] == 0 &&
+                array2[17] == 0 &&
+                array2[18] == 7 &&
+                array2[19] == 0 &&
+                array2[20] == 77 &&
+                array2[21] == 0 &&
+                array2[22] == 0 &&
+                array2[23] == 0 &&
+                array2[24] == 77 &&
+                array2[25] == 0 &&
+                array2[26] == 8 &&
+                array2[27] == 0 &&
+                array2[28] == 11 &&
+                array2[29] == 0 &&
+                array2[30] == 0 &&
+                array2[31] == 11 &&
+                array2[32] == 0 &&
+                array2[33] == 0 &&
+                array2[34] == 0)) {
             System.out.println("error testSorting");
         } else {
             System.out.println("correct testSorting");
@@ -556,7 +620,7 @@ public class ArrayObject {
             isSorted = true;
             for (int i = 1; i < adress.length; i++) {
                 if (adress[i] < adress[i - 1]) {
-                    array = swap2(array, i-1, i);
+                    array = swap(array, i-1, i);
                     int temp = adress[i];
                     adress[i] = adress[i - 1];
                     adress[i - 1] = temp;
