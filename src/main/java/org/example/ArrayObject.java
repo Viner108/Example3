@@ -2,15 +2,17 @@ package org.example;
 
 public class ArrayObject {
     public static void main(String[] args) {
-//        testCreate();
-//        testUpdate();
-//        testGetByIndex();
-//        testDeleteObject();
-//        testDeleteFromMiddle();
-//        testInsertObject();
-//        testSwap();
-//        testShift();
+        testCreate();
+        testUpdate();
+        testGetByIndex();
+        testDeleteObject();
+        testDeleteFromMiddle();
+        testInsertObject();
+        testSwap();
+        testShift();
         testSwap2();
+        testArrayAdress();
+        testSorting();
     }
 
     private static void testCreate() {//тест функции objectCreate
@@ -226,12 +228,57 @@ public class ArrayObject {
                 array2[8] == 0 &&
                 array2[9] == 2 &&
                 array2[10] == 0 &&
-                array2[11] == 0 )) {
+                array2[11] == 0)) {
             System.out.println("error testSwap2");
         } else {
             System.out.println("correct testSwap2");
         }
     }
+    private static void testArrayAdress() {//тест функции swap
+        int[] array = intit(12);//создает массив заполненный -1
+        int[] object = new int[3]; // первый объект для размещенние в массив с нулевыми значениями
+        int[] object2 = new int[2];// второй объект для размещенние в массив с нулевыми значениями
+        int[] object3 = new int[1];// третий объект для размещенние в массив с нулевыми значениями
+        objectCreate(array, object); // функция для размещение первого объкта в массиве
+        objectCreate(array, object2);// функция для размещение второго объкта в массиве
+        objectCreate(array, object3);// функция для размещение третьего объкта в массиве
+        int[] array2 = arrayAdress(array);
+        if (!(array2[0] == 3 &&
+                array2[1] == 2 &&
+                array2[2] == 1)){
+            System.out.println("error testArrayAdress");
+        } else {
+            System.out.println("correct testArrayAdress");
+        }
+    }
+
+    private static void testSorting() {//тест функции swap
+        int[] array = intit(12);//создает массив заполненный -1
+        int[] object = new int[3]; // первый объект для размещенние в массив с нулевыми значениями
+        int[] object2 = new int[1];// второй объект для размещенние в массив с нулевыми значениями
+        int[] object3 = new int[2];// третий объект для размещенние в массив с нулевыми значениями
+        objectCreate(array, object); // функция для размещение первого объкта в массиве
+        objectCreate(array, object2);// функция для размещение второго объкта в массиве
+        objectCreate(array, object3);// функция для размещение третьего объкта в массиве
+        int[] array2 = sorting(array);
+        if (!(array2[0] == 1 &&
+                array2[1] == 0 &&
+                array2[2] == 2 &&
+                array2[3] == 0 &&
+                array2[4] == 0 &&
+                array2[5] == 3 &&
+                array2[6] == 0 &&
+                array2[7] == 0 &&
+                array2[8] == 0 &&
+                array2[9] == -1 &&
+                array2[10] == -1 &&
+                array2[11] == -1)) {
+            System.out.println("error testSorting");
+        } else {
+            System.out.println("correct testSorting");
+        }
+    }
+
 
     public static int[] intit(int size) { // функция для создания и заполнения исходного массива
         int[] array = new int[size];
@@ -424,7 +471,7 @@ public class ArrayObject {
         return array;
     }
 
-    public static int[] shift(int[] array, int indexofobject1, int indexofobject2) {
+    public static int[] shift(int[] array, int indexofobject1, int indexofobject2) {//функция смещения элементов объектов
         int start1 = getAdress(array, indexofobject1);
         int start2 = getAdress(array, indexofobject2);
         if (array[start1] > array[start2] && indexofobject1 - indexofobject2 != 1) {
@@ -442,7 +489,7 @@ public class ArrayObject {
         return array;
     }
 
-    public static int[] copy(int[] array, int indexofobject1, int indexofobject2, int[] object) {
+    public static int[] copy(int[] array, int indexofobject1, int[] object) {//функция для вставки объекта в нужное место
         int start = findStart(array, indexofobject1);
         array[start] = object.length;
         for (int i = start; i < start + object.length; i++) {
@@ -452,7 +499,7 @@ public class ArrayObject {
         return array;
     }
 
-    private static int findStart(int[] array, int indexofobject1) {
+    private static int findStart(int[] array, int indexofobject1) {//функция для поиска начала вставки объекта
         int j = 0;
         int i = 0;
         while (indexofobject1 != j) {
@@ -462,29 +509,63 @@ public class ArrayObject {
         return i;
     }
 
-    public static int[] swap2(int[] array, int indexofobject1, int indexofobject2) {
-        if(indexofobject1<indexofobject2) {
+    public static int[] swap2(int[] array, int indexofobject1, int indexofobject2) {//функция что меняет местами два объекта
+        //в массиве с сохранением их значений
+        if (indexofobject1 < indexofobject2) {
             int[] object1 = getByIndex(array, indexofobject1);
             int[] object2 = getByIndex(array, indexofobject2);
             int[] array2 = shift(array, indexofobject1, indexofobject2);
             printLines(array2);
-            int[] array3 = copy(array2, indexofobject1, indexofobject2, object2);
+            int[] array3 = copy(array2, indexofobject1,  object2);
             printLines(array3);
-            int[] array4 = copy(array2, indexofobject2, indexofobject1, object1);
+            int[] array4 = copy(array2, indexofobject2,  object1);
             printLines(array4);
-        }else {
-            int temp =indexofobject1;
-            indexofobject1=indexofobject2;
-            indexofobject2=temp;
+        } else {
+            int temp = indexofobject1;
+            indexofobject1 = indexofobject2;
+            indexofobject2 = temp;
             int[] object1 = getByIndex(array, indexofobject1);
             int[] object2 = getByIndex(array, indexofobject2);
             int[] array2 = shift(array, indexofobject1, indexofobject2);
             printLines(array2);
-            int[] array3 = copy(array2, indexofobject1, indexofobject2, object2);
+            int[] array3 = copy(array2, indexofobject1, object2);
             printLines(array3);
-            int[] array4 = copy(array2, indexofobject2, indexofobject1, object1);
+            int[] array4 = copy(array2, indexofobject2, object1);
             printLines(array4);
         }
+        return array;
+    }
+
+    public static int[] arrayAdress(int[] array) {// массив с длинами объектов на месте значений
+        int size = getCount(array);
+        int[] adress = new int[size + 1];
+          int j = 0;
+        for (int i = 0; i < array.length&&array[i]!=-1; i = i + array[i] + 1) {
+            adress[j] = array[i];
+            j++;
+            printLines(adress);
+        }
+        printLines(adress);
+        return adress;
+    }
+
+    public static int[] sorting(int[] array) {// фукнция сортировки объектов по их длинне от меньшего к большему
+        int[] adress = arrayAdress(array);
+        boolean isSorted = false;
+        while (!isSorted) {
+            isSorted = true;
+            for (int i = 1; i < adress.length; i++) {
+                if (adress[i] < adress[i - 1]) {
+                    array = swap2(array, i-1, i);
+                    int temp = adress[i];
+                    adress[i] = adress[i - 1];
+                    adress[i - 1] = temp;
+                    isSorted = false;
+                }
+            }
+        }
+        printLines(adress);
+        printLines(array);
         return array;
     }
 
