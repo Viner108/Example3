@@ -2,6 +2,21 @@ package org.example;
 
 public class ArrayObject {
     public static void main(String[] args) {
+        MyFirstClass m1 = new MyFirstClass(27);
+        m1.objectCreate(new int[2]);
+        MyFirstClass m2 = new MyFirstClass(23);
+        MyFirstClass[] arrMyClass = new MyFirstClass[3];
+        for (int i = 0; i < arrMyClass.length; i++) {
+            arrMyClass[i] = new MyFirstClass(1,2);
+        }
+
+        int t11 = 0;
+        for(MyFirstClass m: arrMyClass){
+            m.setA(7);
+            m.sum();
+            t11 = m.getA();
+        }
+        int s = m2.sum();
 //        testCreate();
 //        testUpdate();
 //        testGetByIndex();
@@ -439,7 +454,10 @@ public class ArrayObject {
                 array[i + difference] = array[i];
             }
         }
-        return array;
+        indexofobject1 = -10;
+        int[] arr2 = array;
+        array = new int[2];
+        return arr2;
     }
 
     public static int[] copy(int[] array, int indexofobject1, int indexofobject2, int[] object) {
@@ -463,28 +481,22 @@ public class ArrayObject {
     }
 
     public static int[] swap2(int[] array, int indexofobject1, int indexofobject2) {
-        if(indexofobject1<indexofobject2) {
-            int[] object1 = getByIndex(array, indexofobject1);
-            int[] object2 = getByIndex(array, indexofobject2);
-            int[] array2 = shift(array, indexofobject1, indexofobject2);
-            printLines(array2);
-            int[] array3 = copy(array2, indexofobject1, indexofobject2, object2);
-            printLines(array3);
-            int[] array4 = copy(array2, indexofobject2, indexofobject1, object1);
-            printLines(array4);
-        }else {
+
+        if(indexofobject1>=indexofobject2) {
             int temp =indexofobject1;
             indexofobject1=indexofobject2;
             indexofobject2=temp;
-            int[] object1 = getByIndex(array, indexofobject1);
-            int[] object2 = getByIndex(array, indexofobject2);
-            int[] array2 = shift(array, indexofobject1, indexofobject2);
-            printLines(array2);
-            int[] array3 = copy(array2, indexofobject1, indexofobject2, object2);
-            printLines(array3);
-            int[] array4 = copy(array2, indexofobject2, indexofobject1, object1);
-            printLines(array4);
         }
+        int[] object1 = getByIndex(array, indexofobject1);
+        int[] object2 = getByIndex(array, indexofobject2);
+        System.out.println(indexofobject1);
+        int[] array2 = shift(array, indexofobject1, indexofobject2);
+        System.out.println(indexofobject1);
+        printLines(array2);
+        int[] array3 = copy(array2, indexofobject1, indexofobject2, object2);
+        printLines(array3);
+        int[] array4 = copy(array2, indexofobject2, indexofobject1, object1);
+        printLines(array4);
         return array;
     }
 
