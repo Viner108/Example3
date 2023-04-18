@@ -9,11 +9,11 @@ public class ArrayObject {
         MemoryArrayTest.testDeleteFromMiddle();
         MemoryArrayTest.testInsertObject();
         MemoryArrayTest.testSwap();
-//        MemoryArrayTest.testShift();
-//        MemoryArrayTest.testSwap2();
-//        MemoryArrayTest.testArrayAdress();
-//        MemoryArrayTest.testSorting();
-//        MemoryArrayTest.testSorting2();
+        MemoryArrayTest.testShift();
+        MemoryArrayTest.testSwap2();
+        MemoryArrayTest.testArrayAdress();
+        MemoryArrayTest.testSorting();
+        MemoryArrayTest.testSorting2();
     }
 
 }
